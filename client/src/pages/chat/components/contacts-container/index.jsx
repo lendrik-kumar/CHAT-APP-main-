@@ -1,3 +1,4 @@
+import ProfileInfo from "./profile-info/index.jsx"
 
 const ContactsContainer = () => {
   return (
@@ -15,7 +16,7 @@ const ContactsContainer = () => {
                 <Title text="Channels" />
             </div>
         </div>
-      
+        <ProfileInfo />
     </div>    
   )
 }
@@ -54,8 +55,7 @@ const Logo = () => {
       </div>
     );
   };
-  
-//   export default Logo
+
 
 const Title = ({text}) => {
     return(

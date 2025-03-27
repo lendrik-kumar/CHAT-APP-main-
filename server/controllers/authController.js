@@ -1,7 +1,7 @@
 import { compare } from 'bcrypt'
 import User from '../models/userModel.js'
 import jwt from 'jsonwebtoken'
-import { request } from 'express'
+import { request, response } from 'express'
 import {renameSync, unlinkSync} from 'fs'
 import { log } from 'console'
 
@@ -189,6 +189,19 @@ export const removeProfileImage = async (req, res) => {
         return res.status(200).send("removed sucessfully")
     } catch (error) {
         console.error("Error updating profile:", error)
+        return res.status(500).send("Internal server error")
+    }
+}
+
+export const logOut = async (req, res) => {
+    try {
+        
+        res.cookie("jwt", {maxAge : 1, secure: true , sameSite: null})
+
+        res.status(200).send("Logout Sucessfull")
+
+    } catch (error) {
+        console.error("Error Logging Out", error)
         return res.status(500).send("Internal server error")
     }
 }
