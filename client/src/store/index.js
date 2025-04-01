@@ -1,15 +1,8 @@
-import { create } from 'zustand';
-import { persist } from 'zustand/middleware';
-import { createAuthSlice } from './slices/authSlice.js';
+import { create } from 'zustand'
+import { createAuthSlice } from './slices/authSlice.js'
+import { createChatSlice } from './slices/chatSlice.js'
 
-export const useAppStore = create(
-  persist(
-    (...a) => ({
-      ...createAuthSlice(...a),
-    }),
-    {
-      name: 'app-storage', 
-      getStorage: () => localStorage, 
-    }
-  )
-);
+export const useAppStore = create()((...a) => ({
+  ...createAuthSlice(...a),
+  ...createChatSlice(...a)
+}))

@@ -9,3 +9,9 @@ export const UPDATE_PROFILE_ROUTE = `${HOST}/${AUTH_ROUTES}/update-profile`
 export const ADD_PROFILE_IMAGE_ROUTE = `${HOST}/${AUTH_ROUTES}/add-profile-image` 
 export const REMOVE_PROFILE_IMAGE_ROUTE = `${HOST}/${AUTH_ROUTES}/remove-profile-image`
 export const LOG_OUT = `${HOST}/${AUTH_ROUTES}/logout`
+
+
+export const CONTACT_ROUTES = "api/contacts"
+
+export const SEARCH_CONTACT_ROUTE = `${HOST}/${CONTACT_ROUTES}/search`
+

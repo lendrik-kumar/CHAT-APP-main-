@@ -1,4 +1,5 @@
 import ProfileInfo from "./profile-info/index.jsx"
+import  NewDm  from './new_dm/index.jsx'
 
 const ContactsContainer = () => {
   return (
@@ -9,6 +10,7 @@ const ContactsContainer = () => {
         <div className="my-5">
             <div className="flex items-center justify-between pr-10">
                 <Title text="Direct messages" />
+                <NewDm />
             </div>
         </div>
         <div className="my-5">

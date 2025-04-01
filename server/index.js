@@ -7,6 +7,7 @@ import authRoutes from './routes/authRoutes.js'
 import { fileURLToPath } from 'url'
 import path from 'path'
 import fs from "fs";
+import contactsRoutes from './routes/contactRoutes.js'
 
 
 dotenv.config()
@@ -33,7 +34,8 @@ if (!fs.existsSync(uploadDir)) {
 
 app.use("/uploads/profiles", express.static(path.join(__dirname, "uploads/profiles")))
 
-app.use('/api/auth',authRoutes)
+app.use('/api/auth', authRoutes)
+app.use('/api/contacts', contactsRoutes)
 
 const server = app.listen(port, () => {
     console.log(`Server is running on port: ${port}`)

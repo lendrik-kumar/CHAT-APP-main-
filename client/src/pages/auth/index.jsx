@@ -88,7 +88,7 @@ const Auth = () => {
         <div className='h-[100vh] w-[100vw] flex items-center justify-center relative'>
             {/* GitHub Link */}
             <a
-                href="https://github.com/lendrik-kumar/chat.git"
+                href="https://github.com/lendrik-kumar/CHAT-APP-main-.git"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="absolute top-5 right-5 flex items-center gap-2 text-black font-bold text-lg hover:text-purple-700 transition-all duration-300"
