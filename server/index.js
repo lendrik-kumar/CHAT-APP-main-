@@ -8,6 +8,7 @@ import { fileURLToPath } from 'url'
 import path from 'path'
 import fs from "fs";
 import contactsRoutes from './routes/contactRoutes.js'
+import setupSocket from './socket.js'
 
 
 dotenv.config()
@@ -40,6 +41,8 @@ app.use('/api/contacts', contactsRoutes)
 const server = app.listen(port, () => {
     console.log(`Server is running on port: ${port}`)
 })
+
+// setupSocket(server)
 
 mongoose
     .connect(dataBaseUri)
