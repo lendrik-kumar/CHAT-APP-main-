@@ -4,6 +4,6 @@ import { searchContacts } from "../controllers/contactsController.js"
 
 const contactsRoutes = Router()
 
-contactsRoutes.post("/search", verifyToken, searchContacts)
+contactsRoutes.post("/search",  searchContacts)
 
 export default contactsRoutes

@@ -1,9 +1,7 @@
 import { compare } from 'bcrypt'
 import User from '../models/userModel.js'
 import jwt from 'jsonwebtoken'
-import { request, response } from 'express'
 import {renameSync, unlinkSync} from 'fs'
-import { log } from 'console'
 
 const maxAge = 3 * 24 * 60 * 60 * 1000
 
@@ -196,7 +194,8 @@ export const removeProfileImage = async (req, res) => {
 export const logOut = async (req, res) => {
     try {
         
-        res.cookie("jwt", {maxAge : 1, secure: true , sameSite: null})
+        res.cookie("jwt", {maxAge : 0,
+            httpOnly: true, secure: true , sameSite: "None"})
 
         res.status(200).send("Logout Sucessfull")
 

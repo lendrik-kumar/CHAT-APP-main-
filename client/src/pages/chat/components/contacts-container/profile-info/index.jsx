@@ -15,11 +15,16 @@ const ProfileInfo = () => {
     
 
     const logOut = async () => {
+        console.log("log trigered niga");
+        
         try {
             const response = await apiClient.post(LOG_OUT, {}, {withCredentials: true})
             
             if(response.status === 200) {
+                localStorage.removeItem('app-storage')
                 navigate("/auth")
+                console.log(userInfo);
+                
                 setUserInfo(null)
             }
 
