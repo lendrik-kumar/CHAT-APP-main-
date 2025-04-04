@@ -1,5 +1,5 @@
-import { Socket, Server } from 'socket.io'
-
+import { Server } from 'socket.io'
+    
 const setupSocket = (server) => {
     const io = new Server (server, {
         cors : {
@@ -8,11 +8,11 @@ const setupSocket = (server) => {
             credentials : true
         }
     })
-
+    
     const userSocketMap = new Map()
-
+      
     const disconnect = (socket) => {
-        console.log(`client disconnected : ${socket.id}`)
+        console.log(`Client disconnected : ${socket.id}`)
         for (const [userId, socketId] of userSocketMap.entries()) {
             if(socketId === socket.id){
                 userSocketMap.delete(userId)
@@ -20,20 +20,19 @@ const setupSocket = (server) => {
             }
         }
     }
-
+    
     io.on("connection", (socket) => {
         const userId = socket.handshake.query.userId
-
+        
         if(userId) {
             userSocketMap.set(userId, socket.id)
-        }
-        else {
+            console.log(`socket connected ${userId} with id ${socket.id}`)
+        } else {
             console.log("user id is not given")
         }
-
+    
         socket.on("disconnect", () => disconnect(socket))
-
     })
-}
-
+}   
+    
 export default setupSocket

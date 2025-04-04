@@ -27,7 +27,7 @@ export const SocketProvider = ({children}) => {
             }
         }
     }, [userInfo])
-    
+
     return (
         <SocketContext.Provider value={socket.current} >
             {children}

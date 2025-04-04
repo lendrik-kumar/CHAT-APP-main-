@@ -9,13 +9,15 @@ import path from 'path'
 import fs from "fs";
 import contactsRoutes from './routes/contactRoutes.js'
 import setupSocket from './socket.js'
+import http from 'http'
 
 
 dotenv.config()
 
 const app = express()
-const port = process.env.PORT || 5000
+const port = process.env.PORT || 8000
 const dataBaseUri = process.env.MONGO_URI
+const server = http.createServer(app)
 
 app.use(cors({
     origin: [process.env.ORIGIN],
@@ -38,7 +40,8 @@ app.use("/uploads/profiles", express.static(path.join(__dirname, "uploads/profil
 app.use('/api/auth', authRoutes)
 app.use('/api/contacts', contactsRoutes)
 
-const server = app.listen(port, () => {
+
+server.listen(port, () => {
     console.log(`Server is running on port: ${port}`)
 })
 
