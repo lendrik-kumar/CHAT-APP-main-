@@ -1,7 +1,7 @@
-import { Socket, Server as SocketIoServer } from "socket.io"
+import { Socket, Server } from 'socket.io'
 
 const setupSocket = (server) => {
-    const io = new SocketIoServer (server, {
+    const io = new Server (server, {
         cors : {
             origin : process.env.ORIGIN,
             methods : ["GET", "POST"],
@@ -9,7 +9,7 @@ const setupSocket = (server) => {
         }
     })
 
-    const userSocketMap = new Map ()
+    const userSocketMap = new Map()
 
     const disconnect = (socket) => {
         console.log(`client disconnected : ${socket.id}`)
