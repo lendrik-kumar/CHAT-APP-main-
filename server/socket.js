@@ -1,5 +1,5 @@
 import { Server } from 'socket.io'
-import Message from './models/MessagesModel'
+import Message from './models/MessagesModel.js'
     
 const setupSocket = (server) => {
     const io = new Server (server, {
