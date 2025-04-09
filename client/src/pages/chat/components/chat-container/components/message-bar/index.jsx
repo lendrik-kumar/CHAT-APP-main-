@@ -30,14 +30,15 @@ const MessageBar = () => {
     }
 
     const handleSendMessage = async () => {
-        if(selectedChatData === "contact") {
-            socket.emit("sendMessage", {
+        if(selectedChatType === "contact" && selectedChatData) {
+            await socket.emit("sendMessage", {
                 sender: userInfo.id,
                 content: message,
                 recipient: selectedChatData._id,
                 messageType: "text",
                 fileUrl: undefined
             })
+            // setMessage("")
         }
     }
 

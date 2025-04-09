@@ -90,3 +90,13 @@ const ProfileInfo = () => {
 }
 
 export default ProfileInfo
+
+/*
+code to delete cookie
+var options = {
+    maxAge: ALMOST_ONE_HOUR_MS,
+    domain: '.test.com',
+    expires: new Date(Date.now() + ALMOST_ONE_HOUR_MS)
+};
+var value = userInfo.token;
+cookies.set("testtoken", value, options); */

@@ -23,17 +23,20 @@ export const SocketProvider = ({children}) => {
                 console.log("connected to socket server")
             })
 
-            const handleRecieveMessage = () => {
+            const handleRecieveMessage = (message) => {
                 const {selectedChatData, selectedChatType, addMessage} = useAppStore.getState()
+                console.log("message rxv : ", message)
 
                 if(selectedChatType !== undefined && (selectedChatData._id === message.sender._id || selectedChatData._id === message.recipient._id)) {
-                    console.log("message rxv : ", message)
                     addMessage(message)
+                }
+                else{
+                    console.log("here")
                 }
 
             }
 
-            socket.current.on("recieveMessage", handleRecieveMessage)
+            socket.current.on("receiveMessage", handleRecieveMessage)
 
             return () => {
                 socket.current.disconnect()
@@ -42,7 +45,7 @@ export const SocketProvider = ({children}) => {
     }, [userInfo])
 
     return (
-        <SocketContext.Provider value={socket.current} >
+        <SocketContext.Provider value={socket.current ?? null} >
             {children}
         </SocketContext.Provider>
     )

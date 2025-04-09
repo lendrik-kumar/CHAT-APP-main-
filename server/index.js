@@ -45,9 +45,9 @@ server.listen(port, () => {
     console.log(`Server is running on port: ${port}`)
 })
 
-setupSocket(server)
-
-mongoose
+await mongoose
     .connect(dataBaseUri)
     .then(() => console.log('MongoDB database connection established successfully'))
     .catch(err => console.log(err))
+
+setupSocket(server)
