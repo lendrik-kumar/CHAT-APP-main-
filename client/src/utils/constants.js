@@ -15,3 +15,6 @@ export const CONTACT_ROUTES = "api/contacts"
 
 export const SEARCH_CONTACT_ROUTE = `${HOST}/${CONTACT_ROUTES}/search`
 
+export const MESSAGES_ROUTES = "api/messages"
+export const GET_ALL_MESSAGES = `${HOST}/${MESSAGES_ROUTES}/get-message`
+

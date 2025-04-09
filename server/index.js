@@ -10,6 +10,7 @@ import fs from "fs";
 import contactsRoutes from './routes/contactRoutes.js'
 import setupSocket from './socket.js'
 import http from 'http'
+import messagesRoutes from './routes/messagesRoutes.js'
 
 
 dotenv.config()
@@ -39,6 +40,7 @@ app.use("/uploads/profiles", express.static(path.join(__dirname, "uploads/profil
 
 app.use('/api/auth', authRoutes)
 app.use('/api/contacts', contactsRoutes)
+app.use('/api/messages', messagesRoutes)
 
 
 server.listen(port, () => {

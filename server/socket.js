@@ -1,6 +1,5 @@
 import { Server } from 'socket.io'
 import Message from './models/MessagesModel.js'
-import User from './models/userModel.js'
 
 const setupSocket = (server) => {
     const io = new Server(server, {
@@ -25,8 +24,6 @@ const setupSocket = (server) => {
     }
 
     const sendMessage = async (socket, message) => {
-        console.log("Message Received on Server:", message)
-
         const senderSocketId = userSocketMap.get(message.sender)
         const recipientSocketId = userSocketMap.get(message.recipient)
 
