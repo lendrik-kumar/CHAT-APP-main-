@@ -57,6 +57,7 @@ const MessageContainer = () => {
   }
 
   const renderDMMessages = (message) => {
+    return(
     <div
       className={`${
         message.sender === selectedChatData._id ? "text-left" : "text-right"
@@ -77,6 +78,7 @@ const MessageContainer = () => {
         {moment(message.timestamp).format("LT")}
       </div>
     </div>
+    )
   }
 
   return (

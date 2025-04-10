@@ -1,4 +1,3 @@
-import { req,res } from "express"
 import Message from "../models/MessagesModel.js"
 
 
