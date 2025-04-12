@@ -14,12 +14,14 @@ const ContactsContainer = () => {
     const getContacts = async () => {
       const response = await apiClient.get(GET_DM_CONTACTS_ROUTE, {withCredentials: true})
 
+      console.log(response.data)
+      
       if(response.data.contacts) {
         setDirectMessagesContacts(response.data.contacts)
       }
     }
     getContacts()
-  })
+  },[setDirectMessagesContacts])
 
   return (
     <div className=" relative md:w-[35vw] lg:w-[30vw] xl:w-[20vw] bg-[#1b1c24] border-r-2 border-[#2f303b] w-full ">
@@ -32,7 +34,7 @@ const ContactsContainer = () => {
                 <NewDm />
             </div>
             <div className="max-h-[38vh] overflow-y-auto scrollbar-hidden">
-              <ContactList>
+              <ContactList contacts={directMessagesContacts} >
 
               </ContactList>
             </div>

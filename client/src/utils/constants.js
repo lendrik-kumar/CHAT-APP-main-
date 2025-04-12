@@ -16,5 +16,7 @@ export const SEARCH_CONTACT_ROUTE = `${HOST}/${CONTACT_ROUTES}/search`
 export const GET_DM_CONTACTS_ROUTE = `${HOST}/${CONTACT_ROUTES}/get-contacts-for-dm`
 
 export const MESSAGES_ROUTES = "api/messages"
-export const GET_ALL_MESSAGES = `${HOST}/${MESSAGES_ROUTES}/get-message`
+export const GET_ALL_MESSAGES = `${HOST}/${MESSAGES_ROUTES}/get-messages`
+export const UPLOAD_FILE_ROUTE = `${HOST}/${MESSAGES_ROUTES}/upload-file`
+
 
