@@ -8,7 +8,9 @@ export const createChatSlice = (set, get) => ({
     fileUploadProgress:0 ,
     fileDownloadProgress:0,
     setIsuploading:(isUploading) => set({isUploading}),
-    
+    setIsDownloading:(isDownloading) => set({isDownloading}),
+    setFileUploadProgress:(fileUploadProgress) => set({fileUploadProgress}),
+    setFileDownloadProgress:(fileDownloadProgress) => set({fileDownloadProgress}),
     setSelectedChatType : (selectedChatType) => set({ selectedChatType }),
     selectedChatMessages :[],
     setSelectedChatData : (selectedChatData) => set({ selectedChatData }),

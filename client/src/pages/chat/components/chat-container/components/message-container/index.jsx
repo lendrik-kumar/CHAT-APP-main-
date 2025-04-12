@@ -10,7 +10,15 @@ import {IoMdArrowRoundDown} from 'react-icons/io'
 const MessageContainer = () => {
 
   const scrollRef = useRef()
-  const {selectedChatType, selectedChatData, userInfo, selectedChatMessages, setSelectedChatMessages} = useAppStore() 
+  const {
+    selectedChatType, 
+    selectedChatData, 
+    userInfo, 
+    selectedChatMessages, 
+    setSelectedChatMessages, 
+    setFileDownloadProgress, 
+    setIsDownloading
+  } = useAppStore() 
   const [showImage, setShowImage] = useState(false)
   const [imageURL, setImageURL] = useState(null)
 
@@ -69,8 +77,14 @@ const MessageContainer = () => {
   }
 
   const downloadFile = async (url) => {
+    setIsDownloading(true)
+    setFileDownloadProgress(0)
     const respone = await apiClient.post(`${HOST}/${url}`, {
-      responeType: "blob"
+      responeType: "blob",
+      onDownloadProgress: (progressEvent) => {
+        const {loaded, total} = progressEvent
+        const percentCompleted = Math.round((loaded * 100) / total)
+      }
     })
     const urlBlob = window.URL.createObjectUrl(new Blob(respone.data))
     const link = document.createElement("a")
@@ -80,6 +94,8 @@ const MessageContainer = () => {
     link.click()
     link.remove()
     window.URL.revoke(urlBlob)
+    setIsDownloading(false)
+    setFileDownloadProgress(0)
   }
 
   const renderDMMessages = (message) => {
