@@ -21,7 +21,7 @@ const messageSchema = new mongoose.Schema({
     content : {
         type : String,
         required : function () {
-            return this.messageType === "file"   
+            return this.messageType === "text"   
         }
     },
     fileUrl : {

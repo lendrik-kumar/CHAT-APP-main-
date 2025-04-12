@@ -40,6 +40,6 @@ export const uploadFile = async (req, res) => {
         return res.status(200).json({ filePath: fileName })
 
     } catch (error) {
-        return res.status(500).send("Internal server error")
+        return res.status(500).send("file server error")
     }
 }
