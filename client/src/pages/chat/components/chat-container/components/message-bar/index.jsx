@@ -53,35 +53,35 @@ const MessageBar = () => {
 
     const handleAttachmentChange = async (event) => {
         try {
-            const file = event.target.files[0]
+            const file = event.target.files[0];
             if (file) {
-                const formData = new FormData()
-                
-                console.log(file)
-                
-                formData.append("file", file)
-                setIsUploding(true)
+                console.log("Selected File:", file);
 
-                console.log(formData)
-                const response = await apiClient.post(UPLOAD_FILE_ROUTE, formData, {withCredentials:tru, onUploadProgress: (data) => {
-                    setFileUploadProgress(Math.round((100 * data.loaded) / data.total))
-                }})
-        
-            if (response.status === 200 && response.data) {
-                setIsUploding(false)
-                if(selectedChatType){
-                await socket.emit("sendMessage", {
-                    sender: userInfo.id,
-                    content: message,
-                    recipient: selectedChatData._id,
-                    messageType: "file",
-                    fileUrl: response.data.filePath
-                })}
+                const formData = new FormData();
+                formData.append("file", file);
+
+                const response = await apiClient.post(UPLOAD_FILE_ROUTE, formData, {
+                    withCredentials: true,
+                    onUploadProgress: (data) => {
+                        setFileUploadProgress(Math.round((100 * data.loaded) / data.total));
+                    },headers: { "Content-Type": "multipart/form-data" }
+                });
+
+                if (response.status === 200 && response.data) {
+                    console.log("File uploaded successfully:", response.data);
+                    if (selectedChatType) {
+                        await socket.emit("sendMessage", {
+                            sender: userInfo.id,
+                            content: "",
+                            recipient: selectedChatData._id,
+                            messageType: "file",
+                            fileUrl: response.data.filePath,
+                        });
+                    }
+                }
             }
-        }
         } catch (error) {
-            setIsUploding(false)
-            console.log(error)
+            console.error("Error uploading file:", error);
         }
     }
 

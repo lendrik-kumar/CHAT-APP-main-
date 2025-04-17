@@ -26,20 +26,24 @@ export const getMessages = async (req, res) => {
 
 export const uploadFile = async (req, res) => {
     try {
-        if(!req.file) {
-            return res.status(400).send("fileIs required")
+        if (!req.file) {
+            console.error("No file uploaded. req.file is undefined.");
+            return res.status(400).send("File is required");
         }
-        const date = Date.now()
-        let fileDir = `uploads/files/${date}`
-        let fileName = `${fileDir}/${req.file.orignalname}`
 
-        mkdirSync(fileDir, {recursive: true})
+        console.log("Uploaded File:", req.file);
 
-        renameSync(req.file.path, fileName)
+        const sanitizedFileName = req.file.originalname.replace(/[^a-zA-Z0-9.]/g, "_");
+        const filePath = `uploads/files/${sanitizedFileName}`;
 
-        return res.status(200).json({ filePath: fileName })
+        // Move the file to the correct directory
+        renameSync(req.file.path, filePath);
 
+        const fileUrl = `${process.env.HOST || "http://localhost:8000"}/${filePath}`;
+
+        return res.status(200).json({ filePath: fileUrl });
     } catch (error) {
-        return res.status(500).send("file server error")
+        console.error("Error uploading file:", error);
+        return res.status(500).send("Internal server error while uploading file.");
     }
-}
+};
