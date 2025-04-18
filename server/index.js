@@ -11,6 +11,8 @@ import contactsRoutes from './routes/contactRoutes.js'
 import setupSocket from './socket.js'
 import http from 'http'
 import messagesRoutes from './routes/messagesRoutes.js'
+import { channel } from 'diagnostics_channel'
+import channelRoutes from './routes/channelRoutes.js'
 
 
 dotenv.config()
@@ -42,7 +44,7 @@ app.use("/uploads/files", express.static("uploads/files"))
 app.use('/api/auth', authRoutes)
 app.use('/api/contacts', contactsRoutes)
 app.use('/api/messages', messagesRoutes)
-
+app.use('/api/channel', channelRoutes)
 
 server.listen(port, () => {
     console.log(`Server is running on port: ${port}`)

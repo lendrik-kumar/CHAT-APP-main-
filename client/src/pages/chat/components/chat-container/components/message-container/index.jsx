@@ -30,7 +30,7 @@ const MessageContainer = () => {
           { withCredentials: true }
         )
         if (response.data.messages) {
-          setSelectedChatMessages(response.data.messages);
+          // setSelectedChatMessages(response.data.messages);
         }
       } catch (error) {
         console.log(error);

@@ -27,7 +27,7 @@ const ChatHeader = () => {
                         selectedChatData.color
                         )}`}
                     >
-                        {selectedChatData.firstName
+                        {selectedChatData.firstName && selectedChatType === "contact"
                         ? selectedChatData.firstName.charAt(0).toUpperCase()
                         : selectedChatData.email.charAt(0).toUpperCase()}
                     </div>

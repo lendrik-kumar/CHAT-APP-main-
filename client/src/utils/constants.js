@@ -19,4 +19,7 @@ export const MESSAGES_ROUTES = "api/messages"
 export const GET_ALL_MESSAGES = `${HOST}/${MESSAGES_ROUTES}/get-messages`
 export const UPLOAD_FILE_ROUTE = `${HOST}/${MESSAGES_ROUTES}/upload-file`
 
+export const CHANNEL_ROUTES = "api/channel"
+export const CREATE_CHANNEL_ROUTE = `${HOST}/${CHANNEL_ROUTES}/create-channel`
+
 

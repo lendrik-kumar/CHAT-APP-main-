@@ -10,13 +10,14 @@ import {
 import { Input } from '../../../../../components/ui/input.jsx';
 import { useState, useEffect } from 'react'
 import { apiClient } from '../../../../../lib/api-client.js';
-import { GET_ALL_CONTACTS, HOST, SEARCH_CONTACT_ROUTE } from '../../../../../utils/constants.js'
+import { CREATE_CHANNEL_ROUTE, GET_ALL_CONTACTS, HOST, SEARCH_CONTACT_ROUTE } from '../../../../../utils/constants.js'
 import { useAppStore } from '../../../../../store/index.js';
 import { Button } from '../../../../../components/ui/button.jsx';
 import MultipleSelector from '../../../../../components/ui/multipleselect.jsx'
+import { Contact } from 'lucide-react';
 
 const CreateChannel = () => {
-  const { setSelectedChatType, setSelectedChatData } = useAppStore();
+  const { setSelectedChatType, setSelectedChatData, addChannel } = useAppStore();
   const [newChannelModel, setNewChannelModel] = useState(false);
   const [searchedContacts, setSearchedContacts] = useState([]);
   const [allContacts, setAllContacts] = useState([])
@@ -31,8 +32,25 @@ const CreateChannel = () => {
     getData()
   }, [])
 
-  const CreateChannel = async () => {
+  const createChannel = async () => {
+    try {
+      if(channelName.length > 0 && selectedContacts.length > 0){
+        const response = await apiClient.post(CREATE_CHANNEL_ROUTE, {
+          name : channelName,
+          members : selectedContacts.map((contact) => contact.value)
+        }, {withCredentials: true})
+      
+        if(response.status === 200) {
+          setChannelName("")
+          setSelectedContacts([])
+          setNewChannelModel(false)
+          addChannel(response.data.channel)
+        }
+      }
 
+    } catch (error) {
+      console.log(error)
+    }
   }
 
   const searchContacts = async (searchTerm) => {
@@ -101,8 +119,8 @@ const CreateChannel = () => {
                 }/>
             </div>
             <div>
-              <Button className = 'w-full bg-purple-700 hover:bg-purple-900 transition-all duration-300 mt-3' >
-                create Channel
+              <Button className = 'w-full bg-purple-700 hover:bg-purple-900 transition-all duration-300 mt-3' onClick = {createChannel} >
+                Create channel
               </Button>
             </div>
           </div>
