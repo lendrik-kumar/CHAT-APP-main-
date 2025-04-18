@@ -28,8 +28,7 @@ const MessageContainer = () => {
           GET_ALL_MESSAGES,
           { id: selectedChatData._id },
           { withCredentials: true }
-        );
-
+        )
         if (response.data.messages) {
           setSelectedChatMessages(response.data.messages);
         }
@@ -50,7 +49,6 @@ const MessageContainer = () => {
   });
 
   useEffect(() => {
-    // Reset image states when switching chats
     setShowImage(false);
     setImageURL(null);
   }, [selectedChatData]);
@@ -105,10 +103,12 @@ const MessageContainer = () => {
   };
 
   const renderDMMessages = (message) => {
+    console.log(message);
+    
     return (
         <div
             className={`${
-                message.sender === selectedChatData._id ? "text-left" : "text-right"
+                message.sender !== selectedChatData._id ? "text-left" : "text-right"
             }`}
         >
             {message.messageType === "text" && (
