@@ -21,5 +21,5 @@ export const UPLOAD_FILE_ROUTE = `${HOST}/${MESSAGES_ROUTES}/upload-file`
 
 export const CHANNEL_ROUTES = "api/channel"
 export const CREATE_CHANNEL_ROUTE = `${HOST}/${CHANNEL_ROUTES}/create-channel`
-
+export const GET_USER_CHANNELS_ROUTE = `${HOST}/${CHANNEL_ROUTES}/get-user-channels`
 
