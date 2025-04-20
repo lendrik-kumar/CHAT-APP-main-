@@ -24,24 +24,22 @@ export const SocketProvider = ({children}) => {
             })
 
             const handleRecieveMessage = (message) => {
-                const {selectedChatData, selectedChatType, addMessage} = useAppStore.getState()
+                const {selectedChatData, selectedChatType, addMessage, addContactsInContctList} = useAppStore.getState()
 
                 if(selectedChatType !== undefined && (selectedChatData._id === message.sender._id || selectedChatData._id === message.recipient._id)) {
                     console.log(message)
                     addMessage(message)
                 }
-                else{
-                    console.log("here")
-                }
-
+                addContactsInContctList(message)
             }
 
             const handleRecieveChannelMessage = async (message) => {
-                const { selectedChatData, selectedChatType, addMessage } = useAppStore.getState()
+                const { selectedChatData, selectedChatType, addMessage, addChannelInChannelList } = useAppStore.getState()
 
                 if(selectedChatType !== undefined && selectedChatData._id === message.channelId) {
                     addMessage(message)
                 }
+                addChannelInChannelList(message)
             } 
 
             socket.current.on("receiveMessage", handleRecieveMessage)

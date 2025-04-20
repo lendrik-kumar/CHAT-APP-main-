@@ -2,12 +2,12 @@ import moment from "moment";
 import { useAppStore } from "../../../../../../store/index.js";
 import React, { useEffect, useRef, useState } from "react";
 import { apiClient } from "../../../../../../lib/api-client.js";
-import { GET_ALL_MESSAGES, HOST } from "../../../../../../utils/constants.js";
+import { GET_ALL_MESSAGES, GET_CHANNEL_MESSAGES, HOST } from "../../../../../../utils/constants.js";
 import { MdFolderZip } from "react-icons/md";
 import { IoCloseSharp } from "react-icons/io5";
 import { IoMdArrowRoundDown } from "react-icons/io";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar.jsx";
-import { getColor } from "@/lib/utils.js";
+import { Avatar, AvatarFallback, AvatarImage } from "../../../../../../components/ui/avatar.jsx";
+import { getColor } from "../../../../../../lib/utils.js";
 
 const MessageContainer = () => {
   const scrollRef = useRef();
@@ -32,16 +32,28 @@ const MessageContainer = () => {
           { withCredentials: true }
         )
         if (response.data.messages) {
-          // setSelectedChatMessages(response.data.messages);
+          setSelectedChatMessages(response.data.messages);
         }
       } catch (error) {
         console.log(error);
       }
     };
+    const getChannelMessages = async () => {
+      try {
+        const response = await apiClient.get(`${GET_CHANNEL_MESSAGES}/${selectedChatData._id}`, {withCredentials: true})
+
+        if(response.data.messages){
+          setSelectedChatMessages(response.data.messages)
+        }
+      } catch (error) {
+        console.log(error) 
+      }
+    }
 
     if (selectedChatData._id) {
       if (selectedChatType === "contact") getMessages();
-    }
+      else if (selectedChatType === "channel") getChannelMessages()  
+    } 
   }, [selectedChatData, selectedChatType, setSelectedChatMessages]);
 
   useEffect(() => {

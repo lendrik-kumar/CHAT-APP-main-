@@ -6,6 +6,7 @@ import { useAppStore } from "./store/index.js";
 import { useState, useEffect } from "react";
 import { apiClient } from "./lib/api-client.js";
 import { GET_USER_INFO } from "./utils/constants.js";
+import { BlinkBlur } from "react-loading-indicators";
 
 const PrivateRoute = ({ children, loading }) => {
   const { userInfo } = useAppStore()
@@ -68,7 +69,9 @@ const App = () => {
   }, [setUserInfo])
 
   if (loading) {
-    return <div>Loading...</div>
+    return <div className="flex items-center justify-center h-screen bg-[#1a1b1f]">
+      <BlinkBlur color="#8417FF" size="medium" text="" textColor="" />
+    </div>
   }
 
   return (

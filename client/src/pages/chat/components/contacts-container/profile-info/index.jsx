@@ -17,12 +17,13 @@ const ProfileInfo = () => {
     const logOut = async () => {
         console.log(userInfo)
         try {
-            const response = await apiClient.post(LOG_OUT, {}, {withCredentials: true})
+            const response = await apiClient.post(LOG_OUT, {withCredentials: true})
+            console.log(response);
             
             if(response.status === 200) {
                 localStorage.removeItem('app-storage')
-                await setUserInfo(null)
-                navigate("/auth")   
+                setUserInfo(null)
+                // navigate("/auth")   
             }
         } catch (error) {
             console.log(error)
